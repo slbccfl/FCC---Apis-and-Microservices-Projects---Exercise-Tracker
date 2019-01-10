@@ -16,6 +16,7 @@ router.post('/new-user', (req, res, next) => {
 
 router.get('/users', (req,res,next) => {
   Users.find({}, (err, data) => {
+    if (err) return next(err);
     res.json(data)
   })
 })
@@ -37,7 +38,34 @@ router.post('/add', (req, res, next) => {
 })
 
 router.get('/log', (req, res, next) => {
-   console.log(req);
+  if (Object.keys(req.query).length == 0 || req.query.userId == '') {
+    Exercises.find({}, (err, data) => {
+      if (err) return next(err);
+      res.json(data)
+    })
+  } else {
+    console.log('non-empty /log request');
+    let out = {};
+    Users.findById(req.query.userId, (err, user) => {
+      Exercises.find({
+        userId: req.query.userId
+      })
+      .exec((err, exercises) => {
+        if (err) return next(err)
+        console.log('user(typeof):  ' + user + '(' + typeof(user) + ')');
+        out = user.toJSON();
+        delete out.__v;
+        console.log('exercises.length:  ' + exercises.length);
+        out['count'] = exercises.length;
+        out['log'] = exercises.map(e => ({
+          description: e.description,
+          duration: e.duration,
+          date: e.date.toDateString()
+        }))
+        res.json(out)
+      })
+    })
+  }
 })
 
 module.exports = router
