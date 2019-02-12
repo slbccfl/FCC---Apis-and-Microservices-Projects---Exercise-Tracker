@@ -29,15 +29,31 @@
           <form action="/api/exercise/log" method="get">
             <h3>GET users's exercise log</h3>
             <p><code>GET /api/exercise/log?{userId}[&from][&to][&limit]</code></p>
-            <input id="getuid" type="text" name="userId" placeholder="userId*">
+            <input id="getuid" type="text" name="userId" placeholder="userId">
             <input id="getfromdat" type="text" name="from_date" placeholder="from date (yyyy-mm-dd)">
             <input id="gettodat" type="text" name="to_date" placeholder="to date (yyyy-mm-dd)">
             <input id="getlimit" type="text" name="limit" placeholder="limit (mins.)">
+            <input type="submit" value="Submit">
+          </form>       
+          <form action="/api/exercise/delete" method="post">
+            <h3>DELETE users's exercise log</h3>
+            <p><code>POST /api/exercise/log?{userId}[&from][&to][&limit]</code></p>
+            <input id="deleteuid" type="text" name="userId" placeholder="userId">
+            <input id="deletefromdat" type="text" name="from_date" placeholder="from date (yyyy-mm-dd)">
+            <input id="deletetodat" type="text" name="to_date" placeholder="to date (yyyy-mm-dd)">
+            <input id="deletelimit" type="text" name="limit" placeholder="limit (mins.)">
+            <input type="submit" value="Submit">
+          </form>
+          <form action="/api/exercise/delete-user" method="post">
+            <h3>DELETE A User</h3>
+            <p><code>POST /api/exercise/new-user</code></p>
+            <input id="deleteuname" type="text" name="username" placeholder="username">
             <input type="submit" value="Submit">
           </form>
           <p><strong>GET users's exercise log: </strong><code>GET /api/exercise/log?{userId}[&amp;from][&amp;to][&amp;limit]</code></p>
           <p><strong>{ }</strong> = required, <strong>[ ]</strong> = optional</p>
           <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
+ 
       </div>
    </body>
 

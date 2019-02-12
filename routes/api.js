@@ -27,6 +27,11 @@ router.post('/add', (req, res, next) => {
     if (!user) {
       return next(err)
     }
+    if (req.body.date == '') {
+      let today = new Date().toISOString().slice(0, 10);
+      req.body.date = today;
+    }
+    
     const exercise = new Exercises(req.body)
     exercise.username = user.username
     exercise.save((err, savedExercise) => {
@@ -62,6 +67,7 @@ router.get('/log', (req, res, next) => {
           duration: e.duration,
           date: e.date.toDateString()
         }))
+        console.log(out);
         res.json(out)
       })
     })
