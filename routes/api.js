@@ -74,4 +74,8 @@ router.get('/log', (req, res, next) => {
   }
 })
 
+router.delete('/delete-user', (req, res, next) => {
+  res.send({type: 'DELETE-USER'})
+})
+
 module.exports = router
