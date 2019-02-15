@@ -35,7 +35,7 @@
             <input id="getlimit" type="text" name="limit" placeholder="limit (mins.)">
             <input type="submit" value="Submit">
           </form>       
-          <form action="/api/exercise/delete" method="post">
+          <form action="/api/exercise/delete" method="delete">
             <h3>DELETE users's exercise log</h3>
             <p><code>POST /api/exercise/log?{userId}[&from][&to][&limit]</code></p>
             <input id="deleteuid" type="text" name="userId" placeholder="userId">
@@ -44,7 +44,7 @@
             <input id="deletelimit" type="text" name="limit" placeholder="limit (mins.)">
             <input type="submit" value="Submit">
           </form>
-          <form action="/api/exercise/delete-user" method="post">
+          <form action="/api/exercise/delete-user" method="delete">
             <h3>DELETE A User</h3>
             <p><code>POST /api/exercise/new-user</code></p>
             <input id="deleteuname" type="text" name="username" placeholder="username">
