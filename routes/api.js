@@ -74,8 +74,12 @@ router.get('/log', (req, res, next) => {
   }
 })
 
-router.delete('/delete-user', (req, res, next) => {
-  res.send({type: 'DELETE-USER'})
+router.post('/delete-user', (req, res, next) => {
+  Exercises.deleteMany({userId: req.body.userId}, function(err){});
+  Users.findByIdAndRemove(req.body.userId, (err, user) => {
+    if (err || !user) return next(err);
+    res.send("Removed");
+  })
 })
 
 module.exports = router
