@@ -57,18 +57,22 @@ router.get('/log', (req, res, next) => {
       })
       .exec((err, exercises) => {
         if (err) return next(err)
-        console.log('user(typeof):  ' + user + '(' + typeof(user) + ')');
-        out = user.toJSON();
-        delete out.__v;
-        console.log('exercises.length:  ' + exercises.length);
-        out['count'] = exercises.length;
-        out['log'] = exercises.map(e => ({
-          description: e.description,
-          duration: e.duration,
-          date: e.date.toDateString()
-        }))
-        console.log(out);
-        res.json(out)
+        if (exercises.length < 1) {
+          return next({status:400, message: 'unknown userId'})
+        } else {
+          console.log('user(typeof):  ' + user + '(' + typeof(user) + ')');
+          out = user.toJSON();
+          delete out.__v;
+          console.log('exercises.length:  ' + exercises.length);
+          out['count'] = exercises.length;
+          out['log'] = exercises.map(e => ({
+            description: e.description,
+            duration: e.duration,
+            date: e.date.toDateString()
+          }))
+          console.log(out);
+          res.json(out)
+        }
       })
     })
   }
