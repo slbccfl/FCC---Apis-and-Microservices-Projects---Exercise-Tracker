@@ -28,12 +28,15 @@
           </form>
           <form action="/api/exercise/log" method="get">
             <h3>GET users's exercise log</h3>
+            <p>Submitting a blank form will return <b><i>ALL</i></b> exercise log entries for <b><i>ALL</i></b> userIds<p>
             <p><code>GET /api/exercise/log?{userId}[&from][&to][&limit]</code></p>
             <input id="getuid" type="text" name="userId" placeholder="userId">
             <input id="getfromdat" type="text" name="from_date" placeholder="from date (yyyy-mm-dd)">
             <input id="gettodat" type="text" name="to_date" placeholder="to date (yyyy-mm-dd)">
             <input id="getlimit" type="text" name="limit" placeholder="query results limit (number)">
             <input type="submit" value="Submit">
+            </p>
+            </p>
           </form>  
           <form action="/api/exercise/delete-user" method="post">
             <h3>DELETE A User AND his/her exercises</h3>

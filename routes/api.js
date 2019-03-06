@@ -49,12 +49,24 @@ router.get('/log', (req, res, next) => {
       res.json(data)
     })
   } else {
+    console.log('from date: ' + req.query.from_date);
+    console.log('to date: ' + req.query.to_date);
+    const from = new Date(req.query.from_date)
+    const to = new Date(req.query.to_date)
+    console.log('from date: ' + from);
+    console.log('to date: ' + to);
     console.log('non-empty /log request');
     let out = {};
     Users.findById(req.query.userId, (err, user) => {
       Exercises.find({
-        userId: req.query.userId
+        userId: req.query.userId,
+        date: {
+          $lte: to != 'Invalid Date' ? to.getTime() : Date.now() ,
+          $gte: from != 'Invalid Date' ? from.getTime() : 0
+        }
       })
+      .sort('-date')
+      .limit(parseInt(req.query.limit))
       .exec((err, exercises) => {
         if (err) return next(err)
         if (exercises.length < 1) {
